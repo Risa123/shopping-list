@@ -1,7 +1,7 @@
-import {useContext} from "react"
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
-import ListContext from "../nonVisual/ListContext"
+import {useContext} from "react"
+import ListContext from "../ListProvider"
 
 export default function RemoveItem(props){
     const ListProvider = useContext(ListContext)
@@ -17,7 +17,7 @@ export default function RemoveItem(props){
                 ListProvider.remove(props.id)
                 props.setShow(false)
             }}>Ok</Button>
-            <Button variant = "secondary" onClick = {_=>props.setShow(false)}>Cancel</Button>
+            <Button variant = "secondary" onClick = {_ => props.setShow(false)}>Cancel</Button>
          </Modal.Footer>
     </Modal>
 }
