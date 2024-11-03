@@ -7,6 +7,7 @@ import RenameList from "./RenameList"
 import InviteUser from "./InviteUser"
 import KickMember from "./KickMember"
 import UserContext from "../UserProvider"
+import Login from "../Login"
 
 export default function ListView(){
    const ListProvider = useContext(ListContext)
@@ -28,13 +29,14 @@ export default function ListView(){
       <RenameList show = {showRename} setShow = {setShowRename}/>
       <InviteUser show = {showInvite} setShow = {setShowInvite}/>
       <KickMember show = {showKick} setShow = {setShowKick}/>
+      <Login/>
       {ListProvider.getName()}
      <Button variant = "secondary" onClick = {_=> setShowRename(true)} disabled = {notOwner}>rename</Button> 
      <Button variant = "secondary" onClick = {_ => setShowInvite(true)}>invite</Button>
      <Button variant = "secondary" onClick = {_ => setShowKick(true)} disabled = {notOwner}>kick</Button>
      <Button variant = "primary" onClick= {_=> setShowAdd(true)}>add item</Button>
      <Button variant = "secondary" onClick = {_=> setShowArchived(!showArchived)}>{showArchived?"hide archived":"show archived"}</Button>
-     <Button variant = "secondary" onClick = {_ => ListProvider.kick(currentUser)}>leave list</Button>
+     <Button variant = "secondary" onClick = {_ => ListProvider.kick(currentUser)} disabled = {!notOwner}>leave list</Button>
      {itemComponents}
    </div>
 }

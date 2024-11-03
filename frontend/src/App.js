@@ -13,7 +13,7 @@ export default function App(){
   <BrowserRouter>
     <Routes>
       <Route path = "/">
-       <Route index element = {<ListView/>}/>
+       <Route index element = <ListView/> />
        <Route path = "*" element = {"not found"}></Route>
       </Route>
     </Routes>
