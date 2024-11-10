@@ -3,22 +3,28 @@ import "./index.css"
 import "./App.css"
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import ListView from "./listView/ListView"
+import ListOverview from "./listOverview/ListOverview"
 import {ListProvider} from "./listView/ListProvider"
 import {UserProvider} from "./UserProvider"
+import {OverviewProvider} from "./listOverview/OverviewProvider"
+import Layout from "./Layout"
 
 export default function App(){
   return <ListProvider>  
     <UserProvider>
+    <OverviewProvider>
   <div className = "App">
   <BrowserRouter>
     <Routes>
-      <Route path = "/">
-       <Route index element = <ListView/> />
-       <Route path = "*" element = {"not found"}></Route>
+      <Route path = "/" element = <Layout/> >
+       <Route path = "/listView" element = <ListView/> />
+       <Route path = "*" element = {"not found"}/>
+       <Route index element = <ListOverview/> />
       </Route>
     </Routes>
   </BrowserRouter>
   </div>
+  </OverviewProvider>
   </UserProvider>
   </ListProvider>
 }

@@ -14,6 +14,7 @@ export default function Login(){
         </Modal.Header>
         <Modal.Body>
             <Form>
+              <Form.Label>User Name</Form.Label>  
               <Form.Control type = "text" onChange = {e => setUserName(e.target.value)}/>
             </Form>
         </Modal.Body>
