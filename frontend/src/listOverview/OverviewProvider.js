@@ -1,11 +1,13 @@
-import {createContext,useState} from "react"
+import {createContext,useContext,useState} from "react"
+import UserContext from "../UserProvider"
 
 const OverviewContext = createContext()
 export function OverviewProvider(props){
     const [data,setData] = useState({})
+    const owner = useContext(UserContext).getUser()
     const value = {
         createList:name =>{
-            data[crypto.randomUUID()] = {name:name,solved:false}
+            data[crypto.randomUUID()] = {name:name,solved:false,owner:owner}
             setData({...data})
         },
         get:() => data,
