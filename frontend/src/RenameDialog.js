@@ -1,15 +1,13 @@
-import {useState,useContext} from "react"
+import {useState} from "react"
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
-import OverviewContext from "./OverviewProvider"
 
 export default function RenameList(props){
   const [newName,setNewName] = useState(null)
-  const OverviewProvider = useContext(OverviewContext)
   return <Modal show = {props.show}>
     <Modal.Header>
-        <Modal.Title>Rename List</Modal.Title>
+        <Modal.Title>Rename</Modal.Title>
     </Modal.Header>
     <Modal.Body>
        <Form>
@@ -19,7 +17,7 @@ export default function RenameList(props){
     <Modal.Footer>
         <Button variant = "primary" onClick = {_ =>{
           if(newName != null){
-             OverviewProvider.renameList(props.id,newName)
+             props.action(newName)
              props.setShow(false)
           }
         }}>Rename</Button>

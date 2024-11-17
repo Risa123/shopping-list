@@ -9,13 +9,13 @@ export default function ListOverview(){
     const OverviewProvider = useContext(OverviewContext)
     const [showArchived,setShowArchived] = useState(false)
     const listElements = []
-    for(const [id,list] of Object.entries(OverviewProvider.get())){
+    for(const [id,list] of Object.entries(OverviewProvider.get(showArchived))){
        listElements.push(<List id = {id} name = {list.name}/>)
     }
-    return <div>
+    return <>
         <CreateList show = {showCreate} setShow = {setShowCreate}/>
         <Button variant = "primary" onClick = { _ => setShowCreate(true)}>create list</Button>
         <Button variant = "secondary" onClick = {_ => setShowArchived(!showArchived)}>{showArchived?"hide archived":"show archived"}</Button>
         {listElements}
-    </div>
+    </>
 }

@@ -19,9 +19,7 @@ export default function Login(){
             </Form>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant =  "primary" onClick = { _ =>{
-                UserProvider.login(userName)
-            }}>login</Button>
+            <Button variant =  "primary" onClick = { _ => UserProvider.login(userName)}>login</Button>
         </Modal.Footer>
     </Modal>
 }
