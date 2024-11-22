@@ -1,13 +1,21 @@
 const router = require("express").Router()
 const Ajv = require("ajv")
-const {BAD_REQUEST,CREATED} = require("../common")
+const {BAD_REQUEST,STRING_MAX,OK,INTERNAL_ERROR} = require("../common")
 
 
 const validate = new Ajv().compile({
     type:"object",
     properties:{
-       userName:{type:"string"},
-       userPassword:{type:"string"},
+       userName:{
+        type:"string",
+        minLength:1,
+        maxLength:STRING_MAX,
+       },
+       userPassword:{
+        type:"string",
+        minLength:1,
+        maxLength:STRING_MAX
+      },
        listID:{
          type:"string",
          format:"uuid"
@@ -20,9 +28,15 @@ const validate = new Ajv().compile({
     required:["userName","userPassword","listID","itemID"],
     additionalProperties:false
 })
-router.post("/listDeleteItem",(req,res)=>{
+router.post("/listRenameItem",(req,res)=>{
   if(validate(req.body)){
-     res.send(CREATED)
+    try{
+      
+      res.send(OK)
+    }catch(e){
+      console.error(e.stack)
+      res.send(INTERNAL_ERROR)
+    }
   }else{
      res.send(BAD_REQUEST)
   }

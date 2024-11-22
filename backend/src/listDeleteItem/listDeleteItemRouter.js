@@ -1,24 +1,34 @@
 const router = require("express").Router()
-const {BAD_REQUEST,OK,compileValidation,INTERNAL_ERROR,STRING_MAX} = require("../common")
+const Ajv = require("ajv")
+const {BAD_REQUEST,INTERNAL_ERROR,OK,STRING_MAX} = require("../common")
 
-const validate = compileValidation({
+
+const validate = new Ajv().compile({
     type:"object",
     properties:{
-      userName:{
+       userName:{
         type:"string",
         minLength:1,
         maxLength:STRING_MAX
       },
-      userPassword:{
+       userPassword:{
         type:"string",
         minLength:1,
         maxLength:STRING_MAX
-      }
+      },
+       listID:{
+         type:"string",
+         format:"uuid"
+       },
+       itemID:{
+         type:"string",
+         format:"uuid"
+       }
     },
-    required:["userName","userPassword"],
+    required:["userName","userPassword","listID","itemID"],
     additionalProperties:false
 })
-router.post("/userValidate",(req,res)=>{
+router.post("/listDeleteItem",(req,res)=>{
   if(validate(req.body)){
      try{
 

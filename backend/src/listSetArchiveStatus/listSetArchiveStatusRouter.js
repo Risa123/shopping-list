@@ -1,15 +1,19 @@
 const router = require("express").Router()
-const Ajv = require("ajv")
-const {BAD_REQUEST,CREATED} = require("../common")
+const {BAD_REQUEST,OK,compileValidation,INTERNAL_ERROR,STRING_MAX} = require("../common")
 
-const ajv = new Ajv()
-require("ajv-formats")(ajv)
-
-const validate = ajv.compile({
+const validate = compileValidation({
     type:"object",
     properties:{
-      userName:{type:"string"},
-      userPassword:{type:"string"},
+      userName:{
+         type:"string",
+         minLength:1,
+         maxLength:STRING_MAX
+      },
+      userPassword:{
+         type:"string",
+         minLength:1,
+         maxLength:STRING_MAX
+      },
       listID:{
          type:"string",
          format:"uuid"
@@ -20,7 +24,13 @@ const validate = ajv.compile({
 })
 router.post("/listDelete",(req,res)=>{
   if(validate(req.body)){
-     res.send(CREATED)
+     try{
+      
+      res.send(OK)
+     }catch(e){
+      console.log(e.stack)
+      res.send(INTERNAL_ERROR)
+     }
   }else{
      res.send(BAD_REQUEST)
   }

@@ -12,7 +12,7 @@ export default function List(props){
     const navigate = useNavigate()
     const OverviewProvider = useContext(OverviewContext)
     const currentUser = useContext(UserContext).getUser()
-    const notOwner = currentUser != OverviewProvider.get()[props.id].owner
+    const notOwner = currentUser !== OverviewProvider.get()[props.id].owner
     return <div>
     <RemoveDialog show = {showRemove} setShow = {setShowRemove} action = {() => OverviewProvider.removeList(props.id)}/>    
     <RenameDialog show = {showRename} setShow = {setShowRename} action = {newName => OverviewProvider.renameList(props.id,newName)}/>
