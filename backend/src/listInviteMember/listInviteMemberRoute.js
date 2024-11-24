@@ -1,18 +1,17 @@
-const router = require("express").Router()
-const {BAD_REQUEST,compileValidation,STRING_MAX,OK,INTERNAL_ERROR} = require("../common")
+const {BAD_REQUEST,CREATED,compileValidation,STRING_MAX,INTERNAL_ERROR} = require("../common")
 
 const validate = compileValidation({
     type:"object",
     properties:{
       userName:{
          type:"string",
-         minLegth:1,
+         minLength:1,
          maxLength:STRING_MAX
       },
       userPassword:{
          type:"string",
-         minLegth:1,
-         maxLength:STRING_MAX,
+         minLength:1,
+         maxLength:STRING_MAX
       },
       listID:{
          type:"string",
@@ -22,16 +21,15 @@ const validate = compileValidation({
     required:["listID","userName","userPassword"],
     additionalProperties:false
 })
-router.post("/listDelete",(req,res)=>{
+module.exports = (req,res)=>{
   if(validate(req.body)){
-     try{
-      res.send(OK)
-     }catch(e){
+    try{
+      res.send(CREATED)
+    }catch(e){
       console.error(e.stack)
-      res.send(INTERNAL_ERROR)
-     }
+      res.sendStatus(INTERNAL_ERROR)
+    }
   }else{
-     res.send(BAD_REQUEST)
+     res.sendStatus(BAD_REQUEST)
   }
-})
-module.exports = router
+}

@@ -1,5 +1,4 @@
-const router = require("express").Router()
-const {BAD_REQUEST,CREATED,compileValidation,STRING_MAX} = require("../common")
+const {BAD_REQUEST,OK,compileValidation,STRING_MAX,INTERNAL_ERROR} = require("../common")
 
 const validate = compileValidation({
     type:"object",
@@ -10,23 +9,28 @@ const validate = compileValidation({
          maxLength:STRING_MAX
       },
       userPassword:{
-         type:"string",
-         minLength:1,
-         maxLength:STRING_MAX
+        type:"string",
+        minLength:1,
+        maxLength:STRING_MAX
       },
       listID:{
          type:"string",
          format:"uuid"
-      }
+      },
+      newName:{type:"string"}
     },
     required:["listID","userName","userPassword"],
     additionalProperties:false
 })
-router.post("/listInviteMemberRouter",(req,res)=>{
+module.exports = (req,res)=>{
   if(validate(req.body)){
-     res.send(CREATED)
+     try{
+       res.send(OK)
+     }catch(e){
+       console.error(e.stack)
+       res.sendSend(INTERNAL_ERROR)
+     }
   }else{
-     res.send(BAD_REQUEST)
+     res.sendStatus(BAD_REQUEST)
   }
-})
-module.exports = router
+}

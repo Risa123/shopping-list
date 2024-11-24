@@ -27,16 +27,15 @@ const validate = compileValidation({
     required:["userName","userPassword","listID","name"],
     additionalProperties:false
 })
-router.post("/listAddItem",(req,res)=>{
+module.exports = (req,res)=>{
     if(validate(req.body)){
         try{
           res.send(CREATED)
         }catch(e){
           console.error(e.stack)
-          res.send(INTERNAL_ERROR)
+          res.sendStatus(INTERNAL_ERROR)
         }
      }else{
-        res.send(BAD_REQUEST)
+        res.sendStatus(BAD_REQUEST)
      }
-})
-module.exports = router
+}

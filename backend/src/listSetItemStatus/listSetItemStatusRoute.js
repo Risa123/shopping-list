@@ -1,15 +1,13 @@
-const router = require("express").Router()
-const Ajv = require("ajv")
-const {BAD_REQUEST,STRING_MAX,OK,INTERNAL_ERROR} = require("../common")
+const {BAD_REQUEST,OK,compileValidation,STRING_MAX,INTERNAL_ERROR} = require("../common")
 
 
-const validate = new Ajv().compile({
+const validate = compileValidation({
     type:"object",
     properties:{
        userName:{
         type:"string",
         minLength:1,
-        maxLength:STRING_MAX,
+        maxLength:STRING_MAX
        },
        userPassword:{
         type:"string",
@@ -28,17 +26,15 @@ const validate = new Ajv().compile({
     required:["userName","userPassword","listID","itemID"],
     additionalProperties:false
 })
-router.post("/listRenameItem",(req,res)=>{
+module.exports = (req,res)=>{
   if(validate(req.body)){
     try{
-      
       res.send(OK)
     }catch(e){
       console.error(e.stack)
-      res.send(INTERNAL_ERROR)
+      res.sendStatus(INTERNAL_ERROR)
     }
   }else{
-     res.send(BAD_REQUEST)
+     res.sendStatus(BAD_REQUEST)
   }
-})
-module.exports = router
+}
