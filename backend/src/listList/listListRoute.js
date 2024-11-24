@@ -20,7 +20,7 @@ const validate = compileValidation({
 module.exports = (req,res)=>{
   if(validate(req.body)){
     try{
-      res.send(CREATED)
+      res.send(OK)
     }catch(e){
        console.error(e.stack)
        res.sendStatus(INTERNAL_ERROR)

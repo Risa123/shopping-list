@@ -1,4 +1,4 @@
-const {BAD_REQUEST,CREATED,compileValidation,STRING_MAX,INTERNAL_ERROR} = require("../common")
+const {BAD_REQUEST,OK,compileValidation,STRING_MAX,INTERNAL_ERROR} = require("../common")
 
 const validate = compileValidation({
     type:"object",
@@ -24,7 +24,7 @@ const validate = compileValidation({
 module.exports = (req,res)=>{
   if(validate(req.body)){
      try{
-      res.send(CREATED)
+      res.send(OK)
      }catch(e){
        console.error(e.stack)
        res.sendStatus(INTERNAL_ERROR)

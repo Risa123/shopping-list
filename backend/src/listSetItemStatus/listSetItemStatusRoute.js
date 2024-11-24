@@ -21,9 +21,10 @@ const validate = compileValidation({
        itemID:{
          type:"string",
          format:"uuid"
-       }
+       },
+       status:{type:"boolean"}
     },
-    required:["userName","userPassword","listID","itemID"],
+    required:["userName","userPassword","listID","itemID","status"],
     additionalProperties:false
 })
 module.exports = (req,res)=>{

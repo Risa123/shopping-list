@@ -16,7 +16,8 @@ const validate = compileValidation({
       listID:{
          type:"string",
          format:"uuid"
-      }
+      },
+      status:{type:"boolean"}
     },
     required:["listID","userName","userPassword"],
     additionalProperties:false

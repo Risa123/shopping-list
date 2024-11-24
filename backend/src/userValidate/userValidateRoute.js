@@ -3,12 +3,12 @@ const {BAD_REQUEST,OK,compileValidation,INTERNAL_ERROR,STRING_MAX} = require("..
 const validate = compileValidation({
     type:"object",
     properties:{
-      userName:{
+      name:{
         type:"string",
         minLength:1,
         maxLength:STRING_MAX
       },
-      userPassword:{
+      password:{
         type:"string",
         minLength:1,
         maxLength:STRING_MAX
@@ -20,7 +20,7 @@ const validate = compileValidation({
 module.exports = (req,res)=>{
   if(validate(req.body)){
      try{
-
+      
       res.send(OK)
      }catch(e){
        console.error(e.stack)

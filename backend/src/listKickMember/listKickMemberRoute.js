@@ -1,4 +1,4 @@
-const {BAD_REQUEST,CREATED,compileValidation,STRING_MAX,INTERNAL_ERROR} = require("../common")
+const {BAD_REQUEST,compileValidation,STRING_MAX,INTERNAL_ERROR,OK} = require("../common")
 
 const validate = compileValidation({
     type:"object",
@@ -16,15 +16,16 @@ const validate = compileValidation({
       listID:{
          type:"string",
          format:"uuid"
-      }
+      },
+      memberName:{type:"string"}
     },
-    required:["listID","userName","userPassword"],
+    required:["listID","userName","userPassword","memberName"],
     additionalProperties:false
 })
 module.exports = (req,res)=>{
   if(validate(req.body)){
      try{
-      res.send(CREATED)
+      res.send(OK)
      }catch(e){
        console.error(e.stack)
        res.sendStatus(INTERNAL_ERROR)

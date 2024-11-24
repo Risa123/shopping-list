@@ -1,4 +1,3 @@
-const router = require("express").Router()
 const {BAD_REQUEST,CREATED,compileValidation,STRING_MAX,INTERNAL_ERROR} = require("../common")
 
 const validate = compileValidation({

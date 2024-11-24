@@ -22,9 +22,14 @@ const validate = compileValidation({
        itemID:{
          type:"string",
          format:"uuid"
+       },
+       newName:{
+         type:"string",
+         minLength:1,
+         maxLength:STRING_MAX
        }
     },
-    required:["userName","userPassword","listID","itemID"],
+    required:["userName","userPassword","listID","itemID","newName"],
     additionalProperties:false
 })
 router.post("/listRenameItem",(req,res)=>{
