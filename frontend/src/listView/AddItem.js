@@ -3,13 +3,15 @@ import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import {useContext,useState} from "react"
 import ListContext from "./ListProvider"
+import ConfigContext from "../ConfigProvider"
 
 export default function InputModal(props){
     const ListProvider = useContext(ListContext)
     const [itemName,setItemName] = useState(null)
+    const ConfigProvider = useContext(ConfigContext)
     return <Modal show = {props.show}>
       <Modal.Header>
-          <Modal.Title>add item</Modal.Title>
+          <Modal.Title>{ConfigProvider.getText("addItem")}</Modal.Title>
        </Modal.Header>
        <Modal.Body>
          <Form>

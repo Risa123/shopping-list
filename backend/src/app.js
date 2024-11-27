@@ -1,4 +1,5 @@
 const express = require("express")
+const database = require("./database/database")
 
 const app = express()
 const PORT = 8000
@@ -17,4 +18,8 @@ app.post("/listSetArchiveStatus",require("./listSetArchiveStatus/listSetArchiveS
 app.post("/userValidate",require("./userValidate/userValidateRoute"))
 app.post("/listSetItemStatus",require("./listSetItemStatus/listSetItemStatusRoute"))
 app.post("/listRenameItem",require("./listRenameItem/listRenameItemRoute"))
-app.listen(PORT,() => console.log(`Draft It Together server listening on port ${PORT}`))
+app.listen(PORT,() =>{
+    console.log(`Draft It Together server listening on port ${PORT}`)
+    database.connect()
+})
+process.on("beforeExit",_ => database.close())

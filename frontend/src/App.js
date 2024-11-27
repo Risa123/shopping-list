@@ -8,9 +8,11 @@ import {ListProvider} from "./listView/ListProvider"
 import {UserProvider} from "./UserProvider"
 import {OverviewProvider} from "./listOverview/OverviewProvider"
 import Layout from "./Layout"
+import { ConfigProvider } from "./ConfigProvider"
 
 export default function App(){
   return <UserProvider>
+    <ConfigProvider>
     <OverviewProvider>
     <ListProvider>  
   <div className = "App">
@@ -27,5 +29,6 @@ export default function App(){
   </div>
   </ListProvider>
   </OverviewProvider>
+    </ConfigProvider>
   </UserProvider>
 }

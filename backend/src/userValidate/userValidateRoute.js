@@ -1,4 +1,5 @@
 const {BAD_REQUEST,OK,compileValidation,INTERNAL_ERROR,STRING_MAX} = require("../common")
+const abl = require("./userValidateAbl")
 
 const validate = compileValidation({
     type:"object",
@@ -14,14 +15,13 @@ const validate = compileValidation({
         maxLength:STRING_MAX
       }
     },
-    required:["userName","userPassword"],
+    required:["name","password"],
     additionalProperties:false
 })
 module.exports = (req,res)=>{
   if(validate(req.body)){
      try{
-      
-      res.send(OK)
+       res.status(OK).json(abl(req.body))
      }catch(e){
        console.error(e.stack)
        res.sendStatus(INTERNAL_ERROR)

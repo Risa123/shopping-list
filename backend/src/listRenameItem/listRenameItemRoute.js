@@ -32,7 +32,7 @@ const validate = compileValidation({
     required:["userName","userPassword","listID","itemID","newName"],
     additionalProperties:false
 })
-router.post("/listRenameItem",(req,res)=>{
+module.exports = (req,res)=>{
   if(validate(req.body)){
     try{
       
@@ -44,5 +44,4 @@ router.post("/listRenameItem",(req,res)=>{
   }else{
      res.sendStatus(BAD_REQUEST)
   }
-})
-module.exports = router
+}
