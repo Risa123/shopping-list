@@ -1,18 +1,12 @@
-const {OK,compileValidation,STRING_MAX,route} = require("../../common")
-const abl = require("./getAbl")
+const {OK,compileValidation,route} = require("../../common")
+const abl = require("./abl")
 
 const validate = compileValidation({
     type:"object",
     properties:{
-      userName:{
+      authToken:{
          type:"string",
-         minLength:1,
-         maxLength:STRING_MAX
-      },
-      userPassword:{
-         type:"string",
-         minLength:1,
-         maxLength:STRING_MAX,
+         format:"uuid"
       },
       listID:{
          type:"string",

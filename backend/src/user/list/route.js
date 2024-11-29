@@ -1,5 +1,5 @@
 const {route,compileValidation,OK} = require("../../common")
-const abl = require("./userListAbl")
+const abl = require("./abl")
 
 const validate = compileValidation({
     type:"object",
