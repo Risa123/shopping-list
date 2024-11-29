@@ -10,4 +10,16 @@ const STRING_MAX = 5000
 function compileValidation(scheme){
   return ajv.compile(scheme)
 }
-module.exports = {BAD_REQUEST,OK,INTERNAL_ERROR,CREATED,compileValidation,STRING_MAX}
+function route(req,res,validate,sucessCode,abl){
+  if(validate(req.body)){
+    try{
+      res.status(sucessCode).json(abl(req.body))
+    }catch(e){
+      console.error(e.stack)
+      res.sendStatus(INTERNAL_ERROR)
+    }
+  }else{
+    res.sendStatus(BAD_REQUEST)
+  }
+}
+module.exports = {OK,CREATED,compileValidation,STRING_MAX,route}

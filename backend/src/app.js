@@ -18,8 +18,9 @@ app.post("/listSetArchiveStatus",require("./listSetArchiveStatus/listSetArchiveS
 app.post("/userValidate",require("./userValidate/userValidateRoute"))
 app.post("/listSetItemStatus",require("./listSetItemStatus/listSetItemStatusRoute"))
 app.post("/listRenameItem",require("./listRenameItem/listRenameItemRoute"))
+app.get("/userList",require("./userList/userListRoute"))
 app.listen(PORT,() =>{
-    console.log(`Draft It Together server listening on port ${PORT}`)
+    console.log(`ShoppingList server listening on port ${PORT}`)
     database.connect()
 })
 process.on("beforeExit",_ => database.close())
