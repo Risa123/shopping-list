@@ -1,3 +1,4 @@
-const {update} = require("../dao")
+const {setArchiveStatus} = require("../dao")
+const {ifMemberOrOwnerThen} = require("../../common")
 
-module.exports = async request => await update(request.listID,request.itemID,{"$set":{"items.$.archived":request.status}})
+module.exports = async request => await ifMemberOrOwnerThen(request,async() => await setArchiveStatus(request.listID,request.itemID,request.status))

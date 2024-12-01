@@ -1,3 +1,4 @@
 const {list} = require("../dao")
+const {getByAuthToken} = require("../../user/dao")
 
-module.exports = async _ => await list()
+module.exports = async request => await list((await getByAuthToken(request.authToken)).name)

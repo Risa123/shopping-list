@@ -1,3 +1,4 @@
-const {update} = require("../dao")
+const {r} = require("../dao")
+const {ifMemberOrOwnerThen} = require("../../common")
 
-module.exports = async request => await update(request.listID,request.itemID,{"$set":{"items.$.name":request.newName}})
+module.exports = async request => await ifMemberOrOwnerThen(request,async() => await rename(request.listID,request.itemID,request.newName))

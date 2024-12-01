@@ -1,3 +1,4 @@
-const {update} = require("../dao")
+const {inviteMember} = require("../dao")
+const {ifOwnerThen} = require("../../common")
 
-module.exports = async request => await update(request.listID,{"$push":{members:request.memberName}})
+module.exports = async request => await ifOwnerThen(request,async() => await inviteMember(request.listID,request.memberName))

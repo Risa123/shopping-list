@@ -23,4 +23,14 @@ function getUserCollection(){
 function getListCollection(){
   return listCollection
 }
-module.exports = {connect,close,getUserCollection,getListCollection}
+class NotFound extends Error{
+  constructor(message){
+    super(message)
+  }
+}
+function checkUpdateError(result,message){
+  if(result.modifiedCount == 0){
+     throw new NotFound(message)
+  }
+}
+module.exports = {connect,close,getUserCollection,getListCollection,NotFound,checkUpdateError}

@@ -1,4 +1,4 @@
-const {route,compileValidation,OK} = require("../../common")
+const {compileValidation,OK,route} = require("../../common")
 const abl = require("./abl")
 
 const validate = compileValidation({

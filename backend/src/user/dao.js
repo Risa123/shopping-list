@@ -6,4 +6,20 @@ async function get(name){
 async function list(){
   return await (await getUserCollection().find({})).toArray()
 }
-module.exports = {get,list}
+async function login(id){
+  let authToken = crypto.randomUUID()
+  await getUserCollection().updateOne({_id:id},{"$set":{authToken:authToken}})
+  return authToken
+}
+async function logOff(authToken){
+  await getUserCollection().updateOne({authToken:authToken},{"$set":{authToken:null}})
+}
+async function getByAuthToken(authToken){
+   const user = await getUserCollection().findOne({authToken:authToken})
+   if(!user){
+     throw new AuthException("invalid auth token")
+   }
+   return user
+}
+class AuthException extends Error{}
+module.exports = {get,list,login,logOff,getByAuthToken,AuthException}
