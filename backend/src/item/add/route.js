@@ -8,10 +8,6 @@ const validate = compileValidation({
          type:"string",
          format:"uuid"
       },
-      itemID:{
-         type:"string",
-         format:"uuid"
-      },
       listID:{
          type:"string",
          format:"uuid"
