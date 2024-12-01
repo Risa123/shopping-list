@@ -13,7 +13,7 @@ function compileValidation(scheme){
 function route(req,res,validate,sucessCode,abl){
   if(validate(req.body)){
     try{
-      res.status(sucessCode).json(abl(req.body))
+      abl(req.body).then(data => res.status(sucessCode).json(data))
     }catch(e){
       console.error(e.stack)
       res.sendStatus(INTERNAL_ERROR)

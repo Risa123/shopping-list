@@ -1,2 +1,3 @@
+const {update} = require("../dao")
 
-module.exports = request =>{}
+module.exports = async request => update(request.listID,{"$pull":{members:request.memberName}})

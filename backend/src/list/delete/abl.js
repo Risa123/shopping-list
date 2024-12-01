@@ -1,2 +1,3 @@
+const {remove} = require("../dao")
 
-module.exports = request =>{}
+module.exports = async request => await remove(request.listID)

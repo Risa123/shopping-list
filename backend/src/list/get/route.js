@@ -13,7 +13,7 @@ const validate = compileValidation({
          format:"uuid"
       }
     },
-    required:["listID","userName","userPassword"],
+    required:["listID","authToken"],
     additionalProperties:false
 })
 module.exports = (req,res)=> route(req,res,validate,OK,abl)

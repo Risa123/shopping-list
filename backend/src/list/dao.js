@@ -1,12 +1,18 @@
-const database = require("../database")
+const {getListCollection} = require("../database")
 
-function create(name){
-  database.getListsCollection().insert({name:name,archived:false,items:{},members:[]})
+async function create(name){
+  await getListCollection().insertOne({_id:crypto.randomUUID(),name:name,archived:false,items:[],members:[]})
 }
-function addItem(listID,name){
-  
+async function remove(id){
+   await getListCollection().deleteOne({_id:id})
 }
-function remove(id){
-   database.getListCollection().removeOne({_id:id})
+async function list(){
+  return await (await getListCollection().find({})).toArray()
 }
-module.exports = {create,addItem,remove}
+async function update(id,list){
+   await getListCollection().updateOne({_id:id},list)
+}
+async function get(id){
+  return await getListCollection().findOne({_id:id})
+}
+module.exports = {create,remove,list,update,get}

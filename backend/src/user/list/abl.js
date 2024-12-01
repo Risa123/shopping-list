@@ -1,2 +1,3 @@
+const {list} = require("../dao")
 
-module.exports = request =>{}
+module.exports = async _ => await list()

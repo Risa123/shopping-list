@@ -1,2 +1,3 @@
+const {update} = require("../dao")
 
-module.exports = request =>{}
+module.exports = async request => await update(request.listID,{"$set":{name:request.newName}})

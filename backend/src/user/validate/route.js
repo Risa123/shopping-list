@@ -1,4 +1,4 @@
-const {OK,compileValidation,STRING_MAX,route} = require("../common")
+const {OK,compileValidation,STRING_MAX,route} = require("../../common")
 const abl = require("./abl")
 
 const validate = compileValidation({

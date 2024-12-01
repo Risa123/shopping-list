@@ -1,3 +1,3 @@
-const dao = require("../listDao")
+const {create} = require("../dao")
 
-module.exports = request => dao.create(request.name)
+module.exports = async request => create(request.name)
