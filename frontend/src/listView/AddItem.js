@@ -11,7 +11,7 @@ export default function InputModal(props){
     const ConfigProvider = useContext(ConfigContext)
     return <Modal show = {props.show}>
       <Modal.Header>
-          <Modal.Title>{ConfigProvider.getText("addItem")}</Modal.Title>
+          <Modal.Title>{ConfigProvider.getLocalisedText("addItem")}</Modal.Title>
        </Modal.Header>
        <Modal.Body>
          <Form>
@@ -25,8 +25,8 @@ export default function InputModal(props){
               ListProvider.addItem(itemName)
               props.setShow(false)
             }
-         }}>Ok</Button>
-           <Button variant = "secondary" onClick={_ => props.setShow(false)}>Close</Button>
+         }}>{ConfigProvider.getLocalisedText("ok")}</Button>
+           <Button variant = "secondary" onClick={_ => props.setShow(false)}>{ConfigProvider.getLocalisedText("chancel")}</Button>
        </Modal.Footer>
     </Modal>
 }

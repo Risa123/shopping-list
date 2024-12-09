@@ -1,13 +1,15 @@
-import {useState} from "react"
+import {useContext,useState} from "react"
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
 import Form from "react-bootstrap/Form"
+import ConfigContext from "./ConfigProvider"
 
 export default function RenameList(props){
   const [newName,setNewName] = useState(null)
+  const ConfigProvider = useContext(ConfigContext)
   return <Modal show = {props.show}>
     <Modal.Header>
-        <Modal.Title>Rename</Modal.Title>
+        <Modal.Title>{ConfigProvider.getLocalisedText("rename")}</Modal.Title>
     </Modal.Header>
     <Modal.Body>
        <Form>
@@ -20,8 +22,8 @@ export default function RenameList(props){
              props.action(newName)
              props.setShow(false)
           }
-        }}>Rename</Button>
-        <Button variant = "secondary" onClick = {_ => props.setShow(false)}>Cancel</Button>
+        }}>{ConfigProvider.getLocalisedText("rename")}</Button>
+        <Button variant = "secondary" onClick = {_ => props.setShow(false)}>{ConfigProvider.getLocalisedText("chancel")}</Button>
     </Modal.Footer>
   </Modal>
 }

@@ -19,7 +19,15 @@ const texts = {
       kick:"Vyhodit",
       userName:"Uživatelské jméno",
       userPassword:"Heslo",
-      loginError:"Chybné uživatelské jméno nebo heslo."
+      loginError:"Chybné uživatelské jméno nebo heslo.",
+      confirm:"Jste si jistí?",
+      name:"Jméno",
+      inviteUser:"Pozvat uživatele",
+      kickMember:"Odstranit uživatele",
+      back:"Zpět",
+      leaveList:"Opustit List",
+      lightMode:"světlé",
+      darkMode:"tmavé"
     },
     EN:{
        chancel:"Chancel",
@@ -37,7 +45,15 @@ const texts = {
        kick:"Kick",
        userName:"User Name",
        userPassword:"Password",
-       loginError:"Wrong user name or password"
+       loginError:"Wrong user name or password",
+       confirm:"Are you sure ?",
+       name:"Name",
+       inviteUser:"Invite User",
+       kickMember:"Kick Member",
+       back:"Back",
+       leaveList:"Leave List",
+       lightMode:"Light mode",
+       darkMode:"Dark Mode"
     }
 }
 export function ConfigProvider(props){
@@ -48,7 +64,8 @@ export function ConfigProvider(props){
         getLanguage:() => language,
         getLocalisedText:key => texts[language][key],
         setColorMode:colorMode => setColorMode(colorMode),
-        getColorMode:() => colorMode
+        getColorMode:() => colorMode,
+        getLanguages:() => Object.keys(texts)
     }
     return <ConfigContext.Provider value = {value}>{props.children}</ConfigContext.Provider>
 }

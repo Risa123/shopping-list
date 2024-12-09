@@ -3,13 +3,15 @@ import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import ListContext from "./ListProvider"
+import ConfigContext from "../ConfigProvider"
 
 export default function KickMember(props){
     const ListProvider = useContext(ListContext)
     const [selectedUser,setSelectedUser] = useState(null)
+    const ConfigProvider = useContext(ConfigContext)
     return <Modal show = {props.show}>
           <Modal.Header>
-            <Modal.Title>Kick Member</Modal.Title>
+            <Modal.Title>{ConfigProvider.getLocalisedText("kickMember")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -24,8 +26,8 @@ export default function KickMember(props){
                     ListProvider.kick(selectedUser)
                     props.setShow(false)
                 }
-             }}>kick</Button>
-             <Button variant = "secondary" onClick = {_ => props.setShow(false)}>Close</Button>
+             }}>{ConfigProvider.getLocalisedText("kick")}</Button>
+             <Button variant = "secondary" onClick = {_ => props.setShow(false)}>{ConfigProvider.getLocalisedText("chancel")}</Button>
           </Modal.Footer>
     </Modal>
 }

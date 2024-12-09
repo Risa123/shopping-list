@@ -1,14 +1,14 @@
 import {createContext,useState} from "react"
-import {post} from "./requestCommon"
+import {post,get} from "./requestCommon"
 
 const UserContext = createContext()
 export function UserProvider(props){
     const [user,setUser] = useState(null)
     const value = {
-        getAllUsers:() => ["member","notMember","owner"],
+        getAllUsers:async() => await get("user/list"),
         getUser:() => user,
         login:async(name,password) =>{
-            if(!(await post("userValidate",{name:name,password:password}))){
+            if(!(await post("user/login",{name:name,password:password}))){
                 return false
             }
             setUser(name)

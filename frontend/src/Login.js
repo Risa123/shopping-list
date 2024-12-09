@@ -28,7 +28,11 @@ export default function Login(){
         <Modal.Footer>
             <Button variant = "primary" onClick = { _ =>{
                 if(userName != null && userPassword != null){
-                    setError(UserProvider.login(userName,userPassword)?"":ConfigProvider.getText("loginError"))
+                    const promise = UserProvider.login(userName,userPassword)
+                    promise.then(status => setError(status?"":ConfigProvider.getText("loginError")))
+                    .catch(e =>{
+                        throw e
+                    })
                 }
             }}>{ConfigProvider.getLocalisedText("login")}</Button>
         </Modal.Footer>

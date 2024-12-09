@@ -4,19 +4,25 @@ import Form from "react-bootstrap/Form"
 import {useContext,useState} from "react"
 import UserContext from "../UserProvider"
 import ListContext from "./ListProvider"
+import ConfigContext from "../ConfigProvider"
 
 export default function InviteUser(props){
     const memberElements = []
     const ListProvider = useContext(ListContext)
+    const ConfigProvider = useContext(ConfigContext)
     const [selectedUser,setSelectedUser] = useState(null)
-    for(const user of useContext(UserContext).getAllUsers()){
-        if(user !== ListProvider.getOwner() && !ListProvider.getMembers().includes(user)){
-            memberElements.push(<option>{user}</option>)
+    useContext(UserContext).getAllUsers().then(users =>{
+        for(const user of users){
+            if(user !== ListProvider.getOwner() && !ListProvider.getMembers().includes(user)){
+                memberElements.push(<option>{user}</option>)
+            }
         }
-    }
+    }).catch(e =>{
+        throw e
+    })
     return <Modal show = {props.show}>
         <Modal.Header>
-            <Modal.Title>Invite User</Modal.Title>
+            <Modal.Title>{ConfigProvider.getLocalisedText("inviteUser")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -31,8 +37,8 @@ export default function InviteUser(props){
                     ListProvider.invite(selectedUser)
                     props.setShow(false)
                 }
-            }}>Invite</Button>
-            <Button variant = "secondary" onClick = {_ => props.setShow(false)}>Close</Button>
+            }}>{ConfigProvider.getLocalisedText("invite")}</Button>
+            <Button variant = "secondary" onClick = {_ => props.setShow(false)}>{ConfigProvider.getLocalisedText("chancel")}</Button>
         </Modal.Footer>
     </Modal>
 }
