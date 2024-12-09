@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form"
 import UserContext from "./UserProvider"
 import ConfigContext from "./ConfigProvider"
 
-
 export default function Login(){
     const [userName,setUserName] = useState(null)
     const [userPassword,setUserPassword] = useState(null)

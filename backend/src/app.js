@@ -3,6 +3,7 @@ const {connect,close} = require("./database")
 
 const app = express()
 const PORT = 8000
+
 app.use(require("cors")())
 app.use(express.json())
 app.post("/list/create",require("./list/create/route"))
@@ -20,8 +21,10 @@ app.post("/item/setArchiveStatus",require("./item/setArchiveStatus/route"))
 app.post("/item/rename",require("./item/rename/route"))
 app.get("/user/list",require("./user/list/route"))
 app.post("/user/logOff",require("./user/logOff/route"))
+
 app.listen(PORT,() =>{
     console.log(`ShoppingList server listening on port ${PORT}`)
     connect()
 })
+
 process.on("beforeExit",_ => close())

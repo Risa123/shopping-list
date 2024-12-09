@@ -2,6 +2,7 @@ import {createContext,useState} from "react"
 import {post,get} from "./requestCommon"
 
 const UserContext = createContext()
+
 export function UserProvider(props){
     const [user,setUser] = useState(null)
     const value = {
@@ -17,4 +18,5 @@ export function UserProvider(props){
     }
     return <UserContext.Provider value = {value}>{props.children}</UserContext.Provider>
 }
+
 export default UserContext

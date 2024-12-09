@@ -12,9 +12,11 @@ const CREATED = 201
 const UNAUTHORISED = 401
 const NOT_FOUND = 404
 const STRING_MAX = 5000
+
 function compileValidation(scheme){
   return ajv.compile(scheme)
 }
+
 function route(req,res,validate,sucessCode,abl){
   if(validate(req.body)){
     abl(req.body).then(data => res.status(sucessCode).json(data)).catch(e =>{
@@ -31,6 +33,7 @@ function route(req,res,validate,sucessCode,abl){
     res.sendStatus(BAD_REQUEST)
   }
 }
+
 async function ifOwnerThen(request,action){
   const user = await getByAuthToken(request.authToken)
   const list = getByOwner(user.name)
@@ -40,8 +43,10 @@ async function ifOwnerThen(request,action){
        throw new AuthException("not owner of the list")
     }
 }
+
 async function ifMemberOrOwnerThen(request,action){
   await getByUser((await getByAuthToken(request.authToken)).name) //throws exception if list not found
   return await action()
 }
+
 module.exports = {OK,CREATED,compileValidation,STRING_MAX,route,ifOwnerThen,ifMemberOrOwnerThen}

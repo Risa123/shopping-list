@@ -56,6 +56,7 @@ const texts = {
        darkMode:"Dark Mode"
     }
 }
+
 export function ConfigProvider(props){
     const [language,setLanguage] = useState("CZ")
     const [colorMode,setColorMode] = useState(COLOR_MODE_LIGHT)
@@ -69,6 +70,7 @@ export function ConfigProvider(props){
     }
     return <ConfigContext.Provider value = {value}>{props.children}</ConfigContext.Provider>
 }
+
 export default ConfigContext
 export const COLOR_MODE_DARK = "dark"
 export const COLOR_MODE_LIGHT = "light"

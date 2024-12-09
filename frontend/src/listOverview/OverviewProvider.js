@@ -2,6 +2,7 @@ import {createContext,useContext,useState} from "react"
 import UserContext from "../UserProvider"
 
 const OverviewContext = createContext()
+
 export function OverviewProvider(props){
     const [data,setData] = useState({})
     const owner = useContext(UserContext).getUser()
@@ -26,4 +27,5 @@ export function OverviewProvider(props){
     }
     return <OverviewContext.Provider value = {value}>{props.children}</OverviewContext.Provider>
 }
+
 export default OverviewContext

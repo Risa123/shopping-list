@@ -17,4 +17,5 @@ const validate = compileValidation({
     required:["listID","status","authToken"],
     additionalProperties:false
 })
+
 module.exports = (req,res) => route(req,res,validate,OK,abl)
