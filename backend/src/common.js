@@ -21,16 +21,21 @@ function route(req,res,validate,sucessCode,abl){
   if(validate(req.body)){
     abl(req.body).then(data => res.status(sucessCode).json(data)).catch(e =>{
         if(e instanceof AuthException){
-           res.status(UNAUTHORISED).send(e.message)
+           res.status(UNAUTHORISED).json(e.message)
         }else if(e instanceof NotFound){
-           res.status(NOT_FOUND).send(e.message)
+           res.status(NOT_FOUND).json(e.message)
         }else{
           console.error(e.stack)
           res.sendStatus(INTERNAL_ERROR)
         }
     })
   }else{
-    res.sendStatus(BAD_REQUEST)
+    const errors = [];
+    for(const err of validate.errors){
+      errors.push(err.message);
+    }
+    console.error("bad request: " + errors);
+    res.status(BAD_REQUEST).json(errors)
   }
 }
 

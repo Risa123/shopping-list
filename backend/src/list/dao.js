@@ -1,7 +1,7 @@
 const {getListCollection,NotFound,checkUpdateError} = require("../database")
 
 async function create(name,owner){
-  await getListCollection().insertOne({_id:crypto.randomUUID(),name:name,archived:false,items:[],members:[],owner:owner})
+  return (await getListCollection().insertOne({_id:crypto.randomUUID(),name:name,archived:false,items:[],members:[],owner:owner})).insertedId
 }
 
 async function remove(id){

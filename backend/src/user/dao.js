@@ -1,4 +1,4 @@
-const {getUserCollection} = require("../database")
+const {getUserCollection, checkUpdateError} = require("../database")
 
 async function get(name){
   return await getUserCollection().findOne({name:name})
@@ -10,12 +10,12 @@ async function list(){
 
 async function login(id){
   let authToken = crypto.randomUUID()
-  await getUserCollection().updateOne({_id:id},{"$set":{authToken:authToken}})
+  checkUpdateError(await getUserCollection().updateOne({_id:id},{"$set":{authToken:authToken}}))
   return authToken
 }
 
 async function logOff(authToken){
-  await getUserCollection().updateOne({authToken:authToken},{"$set":{authToken:null}})
+ checkUpdateError(await getUserCollection().updateOne({authToken:authToken},{"$set":{authToken:null}}))
 }
 
 async function getByAuthToken(authToken){
