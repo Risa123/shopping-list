@@ -1,7 +1,9 @@
 const {getListCollection,checkUpdateError} = require("../database")
 
 async function create(listID,name){
-  checkUpdateError(await getListCollection().updateOne({_id:listID},{"$push":{items:{_id:crypto.randomUUID(),name:name,archived:false}}}),"list not found")
+  const item = {_id:crypto.randomUUID(),name:name,archived:false}
+  checkUpdateError(await getListCollection().updateOne({_id:listID},{"$push":{items:item}}),"list not found")
+  return item
 }
 
 async function remove(listID,itemID){

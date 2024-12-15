@@ -14,7 +14,7 @@ const MAX_STRING = 5000
 
 class TestFailedException extends Error{}
 
-let authToken,listID
+let authToken,listID,itemID
 
 async function get(requestName){
   return await fetch(SERVER_ADDRESS + requestName,{method:"GET"})
@@ -64,6 +64,15 @@ function setListID(id){
 function getListID(){
   return listID
 }
+
+function setItemID(id){
+  itemID = id
+}
+
+function getItemID(){
+  return itemID
+}
+
 const validateList = {
   type:"object",
   properties:{
@@ -115,5 +124,5 @@ const validateList = {
   required:["name","_id","archived","members","items"]
 }
 module.exports = {get,post,evaluteTest,BAD_REQUEST,OK,INTERNAL_ERROR,CREATED,UNAUTHORISED,NOT_FOUND,compileValidation,
-  setAuthToken,getAuthToken,MAX_STRING,setListID,getListID,validateList,TestFailedException
+  setAuthToken,getAuthToken,MAX_STRING,setListID,getListID,validateList,TestFailedException,setItemID,getItemID
 }

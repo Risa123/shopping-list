@@ -1,4 +1,4 @@
-const {post,evaluteTest,compileValidation,getAuthToken,MAX_STRING,CREATED,setListID,validateList} = require("../common")
+const {post,evaluteTest,compileValidation,getAuthToken,CREATED,setListID,validateList} = require("../common")
 
 module.exports = async()=>{
   const res = await post("list/create",{
