@@ -13,9 +13,11 @@ export default function ListOverview(){
     const [showArchived,setShowArchived] = useState(false)
     const filterText = showArchived?ConfigProvider.getLocalisedText("hideArchived"):ConfigProvider.getLocalisedText("showArchived")
     const listElements = []
-    for(const [id,list] of Object.entries(OverviewProvider.get(showArchived))){
-       listElements.push(<List id = {id} name = {list.name}/>)
-    }
+    OverviewProvider.get(showArchived).then(data =>{
+        for(const [id,list] of Object.entries(data)){
+            listElements.push(<List id = {id} name = {list.name}/>)
+         }
+    })
     return <>
         <CreateList show = {showCreate} setShow = {setShowCreate}/>
         <Button variant = "primary" onClick = { _ => setShowCreate(true)}>{createList}</Button>

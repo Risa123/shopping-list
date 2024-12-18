@@ -1,29 +1,31 @@
-import {createContext,useContext,useState} from "react"
+import {createContext,useContext} from "react"
 import UserContext from "../UserProvider"
+import {post} from "../requestCommon"
 
 const OverviewContext = createContext()
 
 export function OverviewProvider(props){
-    const [data,setData] = useState({})
     const owner = useContext(UserContext).getUser()
     const value = {
-        createList:name =>{
-            data[crypto.randomUUID()] = {name:name,solved:false,owner:owner}
-            setData({...data})
-        },
-        get:() => data,
-        removeList:id =>{
-            delete data[id]
-            setData({...data})
-        },
-        renameList:(id,newName) =>{
-           data[id].name = newName
-           setData({...data})
-        },
-        setArchived:(id,archived) =>{
-            data[id].archived = archived
-            setData({...data})
-        }
+        createList:async name =>  await post("list/create",{
+            authToken:owner.authToken,
+            name:name
+        }),
+        get:async() => await post("list/list",{authToken:owner.authToken}),
+        removeList:async id => await post("list/delete",{
+            authToken:owner.authToken,
+            listID:id
+        }),
+        renameList:async(id,newName) => await post("list/rename",{
+            authToken:owner.authToken,
+            listId:id,
+            newName:newName
+        }),
+        setArchived:async (id,archived) => await post("list/setArchiveStatus",{
+            authToken:owner.authToken,
+            listID:id,
+            status:archived
+        })
     }
     return <OverviewContext.Provider value = {value}>{props.children}</OverviewContext.Provider>
 }

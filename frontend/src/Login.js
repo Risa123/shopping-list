@@ -28,7 +28,7 @@ export default function Login(){
             <Button variant = "primary" onClick = { _ =>{
                 if(userName != null && userPassword != null){
                     const promise = UserProvider.login(userName,userPassword)
-                    promise.then(status => setError(status?"":ConfigProvider.getText("loginError")))
+                    promise.then(status => setError(status?"":ConfigProvider.getLocalisedText("loginError")))
                     .catch(e =>{
                         throw e
                     })

@@ -9,10 +9,11 @@ export function UserProvider(props){
         getAllUsers:async() => await get("user/list"),
         getUser:() => user,
         login:async(name,password) =>{
-            if(!(await post("user/login",{name:name,password:password}))){
+            const res = await post("user/login",{name:name,password:password})
+            if(!res.ok){
                 return false
             }
-            setUser(name)
+            setUser({name:name,authToken:await res.json()})
             return true
         }
     }
