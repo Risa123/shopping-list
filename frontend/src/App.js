@@ -8,7 +8,7 @@ import {ListProvider} from "./listView/ListProvider"
 import {UserProvider} from "./UserProvider"
 import {OverviewProvider} from "./listOverview/OverviewProvider"
 import Layout from "./Layout"
-import { ConfigProvider } from "./ConfigProvider"
+import {ConfigProvider} from "./ConfigProvider"
 
 export default function App(){
   return <UserProvider>
@@ -29,6 +29,6 @@ export default function App(){
   </div>
   </ListProvider>
   </OverviewProvider>
-    </ConfigProvider>
+  </ConfigProvider>
   </UserProvider>
 }
